@@ -1,0 +1,17 @@
+{
+  "name": "Bot_Telegram",
+  "version": "1.0.0",
+  "description": "",
+  "main":"Maria_Ivanivna.py",
+  "scripts":{
+    "start":"Python Maria_Ivanivna.py"
+  },
+  "engines":{
+    "Python":"3.6.0"
+  },
+  "author":"Evgeniy Shaydarov",
+  "license":"ISC",
+  "dependencies":{
+
+  }
+}
