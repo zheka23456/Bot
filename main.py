@@ -1,10 +1,8 @@
 import telebot
 import constants
 import os
-import random
-import urllib.request as urllib2
+import Nachalniki
 bot = telebot.TeleBot(constants.token)
-
 
 
 @bot.message_handler(commands=['start'])
@@ -19,6 +17,7 @@ def handle_start(message):
     bot.send_message(message.from_user.id, "Доброго часу доби)", reply_markup=user_markup)
 
 print(bot.get_me())
+
 
 def log(message, answer):
                 print("\n-----")
@@ -44,11 +43,7 @@ def handle_text(message):
                                                       "\n Приємного спілкування 😉 ")
 
 
-
-
-
 @bot.message_handler(content_types=['text'])
-
 def handle_tex(message):
     message.text = message.text.lower()
     if message.text.find("лох") != -1 or message.text.find("сук") != -1 or message.text.find("бля") != -1:
@@ -548,19 +543,17 @@ def handle_tex(message):
             or message.text.find("други") != -1 and message.text.find("да") != -1 \
             or message.text.find("трет") and message.text.find("так") != -1 \
             or message.text.find("трет") and message.text.find("да") != -1:
-            answer = "Ваш зав відділення: Жмуд Надія Олександрівна"
-            log(message, answer)
-            bot.send_message(message.chat.id, "Ваш зав відділення: Жмуд Надія Олександрівна")
-    elif message.text.find("1") != -1 and message.text.find("ні") != -1 != -1 \
-            or message.text.find("1") != -1 and message.text.find("нет") != -1 \
-            or message.text.find("2") != -1 and message.text.find("ні") != -1 \
+        answer = "Ваш зав відділенням: " + Nachalniki.Zhmud.prizv \
+                 + Nachalniki.Zhmud.name + Nachalniki.Zhmud.po_batkovi
+        log(message, answer)
+        bot.send_message(message.chat.id, "Ваш зав відділенням:" + Nachalniki.Zhmud.prizv
+                         + Nachalniki.Zhmud.name + Nachalniki.Zhmud.po_batkovi)
+    elif message.text.find("2") != -1 and message.text.find("ні") != -1 \
             or message.text.find("2") != -1 and message.text.find("нет") != -1 \
-            or   message.text.find("3") != -1 and message.text.find("ні") != -1 \
+            or message.text.find("3") != -1 and message.text.find("ні") != -1 \
             or message.text.find("3") != -1 and message.text.find("нет") != -1 \
             or message.text.find("4") != -1 and message.text.find("ні") != -1 \
             or message.text.find("4") != -1 and message.text.find("нет") != -1 \
-            or message.text.find("пер") != -1 and message.text.find("ні") != -1 \
-            or message.text.find("пер") != -1 and message.text.find("нет") != -1 \
             or message.text.find("втор") != -1 and message.text.find("ні") != -1 \
             or message.text.find("втор") != -1 and message.text.find("нет") != -1 \
             or message.text.find("други") != -1 and message.text.find("ні") != -1 \
@@ -569,9 +562,19 @@ def handle_tex(message):
             or message.text.find("трет") != -1 and message.text.find("нет") != -1 \
             or message.text.find("чет") != -1 and message.text.find("ні") != -1 \
             or message.text.find("чет") != -1 and message.text.find("нет") != -1:
-            answer = "Ваш зав відділення: Совгир Людмила Миколаївна"
-            log(message, answer)
-            bot.send_message(message.chat.id, "Ваш зав відділення: Совгир Людмила Миколаївна")
+        answer = "Ваш зав відділенням: " + Nachalniki.Sovgir.prizv + Nachalniki.Sovgir.name + Nachalniki.Sovgir.po_batkovi
+        log(message, answer)
+        bot.send_message(message.chat.id, "Ваш зав відділенням: " + Nachalniki.Sovgir.prizv
+                         + Nachalniki.Sovgir.name + Nachalniki.Sovgir.po_batkovi)
+    elif message.text.find("1") != -1 and message.text.find("ні") != -1 != -1 \
+            or message.text.find("1") != -1 and message.text.find("нет") != -1 \
+            or message.text.find("пер") != -1 and message.text.find("ні") != -1 \
+            or message.text.find("пер") != -1 and message.text.find("нет") != -1:
+        answer = "Ваш зав відділенням: " + Nachalniki.Vasiletc.prizv \
+                 + Nachalniki.Vasiletc.name + Nachalniki.Vasiletc.po_batkovi
+        log(message, answer)
+        bot.send_message(message.chat.id, "Ваш зав відділенням: " + Nachalniki.Vasiletc.prizv
+                         + Nachalniki.Vasiletc.name + Nachalniki.Vasiletc.po_batkovi)
     elif message.text.find("марш") != -1 or message.text.find("15") != -1:
         answer = "Розклад маршруту №15:"
         log(message, answer)
@@ -584,10 +587,25 @@ def handle_tex(message):
             bot.send_chat_action(message.chat.id, 'upload_document')
             bot.send_document(message.chat.id, doc)
             doc.close()
+    elif message.text.find("директ") != -1:
+        answer = "Наш директор: " + Nachalniki.Director.prizv \
+                 + Nachalniki.Director.name + Nachalniki.Director.po_batkovi
+        log(message, answer)
+        bot.send_message(message.chat.id,
+                         "Наш " + Nachalniki.Director.posada + ": " + Nachalniki.Director.prizv
+                         + Nachalniki.Director.name + Nachalniki.Director.po_batkovi)
+    elif message.text.find("зам") != -1:
+        answer = Nachalniki.Zamistnik.posada + ": " + Nachalniki.Director.posada + ": " + Nachalniki.Zamistnik.prizv \
+                 + Nachalniki.Zamistnik.name + Nachalniki.Zamistnik.po_batkovi
+        log(message, answer)
+        bot.send_message(message.chat.id,
+                         Nachalniki.Zamistnik.posada + ": " + Nachalniki.Zamistnik.prizv
+                         + Nachalniki.Zamistnik.name + Nachalniki.Zamistnik.po_batkovi)
     else:
         answer = "Я не впевнена, що зрозуміла вас правильно"
         log(message, answer)
         bot.send_message(message.chat.id, "Я не впевнена, що зрозуміла вас правильно")
+
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
